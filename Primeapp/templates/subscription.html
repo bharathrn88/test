@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Prime Subscription</title>
+    <style>
+        /* Basic Styles */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f7f7;
+        }
+
+        header {
+            background-color: #232f3e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 80%;
+            margin: 0 auto;
+            padding: 40px 0;
+        }
+
+        .subscription-options {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: 30px;
+        }
+
+        .plan {
+            background-color: white;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            width: 30%;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .plan:hover {
+            transform: translateY(-10px);
+        }
+
+        .plan h3 {
+            font-size: 24px;
+            margin: 20px 0;
+        }
+
+        .plan p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        .plan .price {
+            font-size: 30px;
+            font-weight: bold;
+            color: #232f3e;
+        }
+
+        .plan button {
+            background-color: #f0c14b;
+            color: #111;
+            border: 1px solid #a88734;
+            padding: 10px 20px;
+            font-size: 18px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .plan button:hover {
+            background-color: #e7b600;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 40px;
+        }
+
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-container input[type="text"],
+        .form-container input[type="email"],
+        .form-container input[type="tel"],
+        .form-container input[type="submit"] {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+
+        .form-container input[type="submit"] {
+            background-color: #232f3e;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            border: none;
+        }
+
+        .form-container input[type="submit"]:hover {
+            background-color: #4b8dff;
+        }
+
+        .footer {
+            background-color: #232f3e;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Amazon Prime Subscription</h1>
+    <p>Choose your plan and start streaming now!</p>
+</header>
+
+<div class="container">
+    <div class="subscription-options">
+        <div class="plan" id="monthly-plan">
+            <h3>Monthly Plan</h3>
+            <p>Watch movies, TV shows, and more!</p>
+            <p class="price">rs.179 / month</p>
+            <button onclick="selectPlan('Monthly')">Select</button>
+        </div>
+        <div class="plan" id="yearly-plan">
+            <h3>Yearly Plan</h3>
+            <p>Save 30% with yearly subscription.</p>
+            <p class="price">rs1799/ year</p>
+            <button onclick="selectPlan('Yearly')">Select</button>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <h2>Sign Up for Your Subscription</h2>
+        <form id="subscription-form" onsubmit="return handleFormSubmit(event)">
+            <input type="text" id="full-name" placeholder="Full Name" required />
+            <input type="email" id="email" placeholder="Email Address" required />
+            <input type="tel" id="phone" placeholder="Phone Number" required />
+            <input type="submit" value="Subscribe Now" />
+        </form>
+        <p id="selected-plan" style="text-align: center; margin-top: 20px; font-weight: bold;"></p>
+    </div>
+</div>
+
+<footer class="footer">
+    <p>&copy; 2024 Amazon Prime Subscription. All Rights Reserved.</p>
+</footer>
+
+<script>
+    let selectedPlan = '';
+
+    // Handle plan selection
+    function selectPlan(plan) {
+        selectedPlan = plan;
+        document.getElementById('selected-plan').innerText = `You have selected the ${plan} Plan. Please fill out the form to complete your subscription.`;
+    }
+
+    // Handle form submission
+    function handleFormSubmit(event) {
+        event.preventDefault(); // Prevent form from refreshing the page
+
+        // Get form values
+        const fullName = document.getElementById('full-name').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+
+        // Basic validation
+        if (!selectedPlan) {
+            alert('Please select a subscription plan!');
+            return;
+        }
+
+        // Show a confirmation message
+        alert(`Thank you, ${fullName}! You have successfully subscribed to the ${selectedPlan} plan. A confirmation email has been sent to ${email}.`);
+
+        // Reset form
+        document.getElementById('subscription-form').reset();
+        document.getElementById('selected-plan').innerText = '';
+    }
+</script>
+
+</body>
+</html>

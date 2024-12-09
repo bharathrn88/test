@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Prime Video</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/js/all.min.js"></script>
+</head>
+<body class="bg-black text-white font-sans">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-black bg-opacity-90">
+        <div class="container mx-auto flex items-center justify-between py-4 px-6">
+            <div class="flex items-center space-x-8">
+                <img src="static/logo.jpeg" alt="Prime Video Logo" class="h-8">
+                <nav class="space-x-6 hidden md:block">
+                    <a href="/home" class="text-gray-300 hover:text-white">Home</a>
+                    <a href="/movies" class="text-gray-300 hover:text-white">Movies</a>
+                    <a href="/account" class="text-gray-300 hover:text-white">Account</a>
+                    <a href="/subscription" class="text-gray-300 hover:text-white">Subscription</a>
+                </nav>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="relative">
+                    <input
+                        type="text"
+                        placeholder="Search"
+                        class="bg-gray-800 text-white px-3 py-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    >
+                    <i class="fas fa-search absolute right-3 top-3 text-gray-400"></i>
+                </div>
+                <button class="bg-blue-600 hover:bg-blue-700 px-4 py-2 rounded-md">
+                   <a href="/signin">Sign In</a>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-20">
+        <!-- Hero Section -->
+        <section class="relative h-[80vh] overflow-hidden">
+            <div id="heroCarousel" class="relative h-full">
+                <!-- Hero Carousel JS will populate this -->
+            </div>
+        </section>
+
+        <!-- Recommended Sections -->
+        <section class="container mx-auto px-6 mt-10">
+            <h2 class="text-2xl font-bold mb-6">Recommended For You</h2>
+            <div id="recommendedCarousel" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
+                <!-- Recommended Movies/Shows JS will populate this -->
+            </div>
+        </section>
+
+        <!-- Popular Genres -->
+        <section class="container mx-auto px-6 mt-10">
+            <h2 class="text-2xl font-bold mb-6">Popular Genres</h2>
+            <div id="genresContainer" class="flex flex-wrap gap-4">
+                <!-- Genres JS will populate this -->
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 py-10 mt-10">
+        <div class="container mx-auto px-6 grid md:grid-cols-4 gap-8">
+            <div>
+                <h3 class="font-bold mb-4">Company</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white">About Us</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Careers</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Press</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-bold mb-4">Help</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white">Contact Us</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">FAQ</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Support</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-bold mb-4">Legal</h3>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-gray-400 hover:text-white">Terms of Service</a></li>
+                    <li><a href="#" class="text-gray-400 hover:text-white">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 class="font-bold mb-4">Connect</h3>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="text-gray-400 hover:text-white"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Sample Data
+        const heroContent = [
+            {
+                title: "The Boys",
+                description: "Superhero drama that takes a dark turn",
+                image: "/api/placeholder/1600/900",
+                link: "#"
+            },
+            {
+                title: "Reacher",
+                description: "Action-packed thriller series",
+                image: "/api/placeholder/1600/900",
+                link: "#"
+            }
+        ];
+
+        const recommendedContent = [
+            { title: "Jack Ryan", image: "static/ryan.jpeg" },
+            { title: "The Wheel of Time", image: "static/ram.jpeg" },
+            { title: "KGF-2", image: "static/kgf2.jpeg" },
+            { title: "The Terminal List", image: "static/terminal.jpeg" },
+            { title: "Upload", image: "static/upload.jpeg" }
+        ];
+
+        const genres = [
+            "Action", "Comedy", "Drama", "Sci-Fi",
+            "Thriller", "Romance", "Documentary", "Fantasy"
+        ];
+
+        // Hero Carousel Functionality
+        function initHeroCarousel() {
+            const carousel = document.getElementById('heroCarousel');
+            carousel.innerHTML = heroContent.map((item, index) => `
+                <div class="hero-slide ${index === 0 ? 'active' : ''} absolute inset-0 transition-opacity duration-500">
+                    <img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover">
+                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black to-transparent p-10">
+                        <h1 class="text-4xl font-bold mb-4">${item.title}</h1>
+                        <p class="text-xl mb-6">${item.description}</p>
+                        <a href="${item.link}" class="bg-blue-600 hover:bg-blue-700 px-6 py-3 rounded-md">Watch Now</a>
+                    </div>
+                </div>
+            `).join('');
+
+            // Auto-rotate slides every 5 seconds
+            setInterval(() => {
+                const slides = carousel.querySelectorAll('.hero-slide');
+                const currentIndex = Array.from(slides).findIndex(slide => slide.classList.contains('active'));
+                slides[currentIndex].classList.remove('active');
+                const nextIndex = (currentIndex + 1) % slides.length;
+                slides[nextIndex].classList.add('active');
+            }, 5000);
+        }
+
+        // Recommended Content Functionality
+        function initRecommendedContent() {
+            const container = document.getElementById('recommendedCarousel');
+            container.innerHTML = recommendedContent.map(item => `
+                <div class="relative group cursor-pointer">
+                    <img src="${item.image}" alt="${item.title}" class="w-full rounded-lg transform group-hover:scale-105 transition duration-300">
+                    <div class="absolute bottom-0 left-0 right-0 bg-black bg-opacity-70 p-2 text-center">
+                        <p class="text-sm">${item.title}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Genres Functionality
+        function initGenres() {
+            const container = document.getElementById('genresContainer');
+            container.innerHTML = genres.map(genre => `
+                <div class="bg-gray-800 px-4 py-2 rounded-full hover:bg-gray-700 cursor-pointer">
+                    ${genre}
+                </div>
+            `).join('');
+        }
+
+        // Initialize everything when page loads
+        document.addEventListener('DOMContentLoaded', () => {
+            initHeroCarousel();
+            initRecommendedContent();
+            initGenres();
+        });
+    </script>
+</body>
+</html>

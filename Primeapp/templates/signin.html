@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Amazon Registration</title>
+    <style>
+      @import url("http://fonts.cdnfonts.com/css/amazon-ember");
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Amazon Ember", sans-serif;
+  text-decoration: none;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 25px;
+}
+
+img {
+  margin: 15px 90px 15px;
+  cursor: pointer;
+  width: 180px;
+}
+
+.errorBox {
+  display: none;
+  width: 18%;
+}
+
+.error {
+  margin: 20px 0;
+  min-height: 50px;
+  width: 100%;
+  border: 1px solid #c40;
+  border-radius: 0 0 0 4px #fcf4f4 inset;
+  border-radius: 4px;
+  padding: 14px 18px 14px 20px;
+  display: flex;
+}
+
+.errorList {
+  list-style-type: none;
+}
+
+.emailErr,
+.passErr,
+.wrongCredentials {
+  display: none;
+}
+
+.error span {
+  margin-left: 15px;
+}
+
+.error span > ul {
+  padding-top: 5px;
+  font-size: 13px;
+  line-height: 19px;
+  color: #111;
+}
+
+.error h4 {
+  color: #c40;
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 21px;
+}
+
+/* Sign In */
+
+.signInBox {
+  border: 1px solid #ddd;
+  margin: auto;
+  margin-bottom: 26px;
+  border-radius: 5px;
+  width: 18%;
+  padding: 10px 25px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.signInBox > h1 {
+  font-size: 28px;
+  font-weight: 400;
+  line-height: 1.2;
+  margin: 8px 0 15px 0;
+}
+
+.inputText,
+.input {
+  font-size: 13px;
+  color: #111;
+  line-height: 19px;
+  font-weight: 700;
+  padding: 2px;
+}
+
+input:focus {
+  border: 2px solid #e98216;
+}
+
+a {
+  color: #0066c0;
+  cursor: pointer;
+}
+
+.forgetPass {
+  font-weight: lighter;
+}
+
+.data {
+  width: 100%;
+  height: 31px;
+  padding: 3px 7px;
+  border: 1px solid #a6a6a6;
+  border-top-color: #949494;
+  border-radius: 3px;
+  box-shadow: 0 1px 0 rgb(255, 255, 255 / 50%), 0 1px 0 rgb(0, 0, 0 / 7%) inset;
+  margin-right: 0;
+  outline: 0;
+}
+
+.passLabel {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  margin: 10px 0;
+}
+
+button {
+  padding: 6px;
+  border-radius: 3px;
+  width: 100%;
+  cursor: pointer;
+  background-color: linear-gradient(to bottom, #f7ffa5, #f0c14b);
+}
+
+.signInBtn {
+  margin: 10px 0 0 0;
+  background-color: #f0c24e;
+  font-size: 13px;
+  line-height: 19px;
+  border: 1px solid;
+  border-color: #a88734 #9c7e31 #846a29;
+}
+
+.terms > p {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 10px;
+}
+
+.keepSignIn {
+  margin: 20px 5px;
+}
+
+.keepSignIn > a,
+label {
+  font-size: 13px;
+}
+
+i {
+  padding-left: 5px;
+  color: gray;
+}
+
+.newToAmazon > h5 {
+  font: 10px sans-serif;
+  margin-top: 15px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.noSpan {
+  text-align: center;
+  color: gray;
+  font-weight: lighter;
+}
+
+.signupPage > button {
+  background-color: linear-gradient(to bottom, #f7f8fa, #e7e9ec);
+  line-height: 19px;
+  border: 1px solid rgb(182, 175, 175);
+  outline: 0;
+  margin: 15px 0;
+}
+
+/* footer */
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  padding: 15px 0 30px 0;
+  border-top: 1px solid #ccc;
+  box-shadow: outset 1px 5px 5px 0px rgba(0, 0, 0, 0.31);
+  width: 40%;
+  margin: auto;
+}
+
+.terms {
+  display: flex;
+  justify-content: center;
+}
+
+.terms > p {
+  margin: 5px 5px;
+}
+
+.copyright {
+  text-align: center;
+  font-size: 12px;
+  color: gray;
+  margin: 5px 0;
+}
+
+    </style>
+    <link
+      rel="shortcut icon"
+      href="../images/amazon-logo.png"
+      type="image/png"
+    />
+    <link rel="stylesheet" href="signIn.css" />
+    <script
+      src="https://kit.fontawesome.com/7edaac5171.js"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <div id="container">
+      <!-- logo -->
+      <img src="static/logo.jpeg" alt="main-logo" />
+
+      <header class="errorBox">
+        <div class="error">
+          <p>
+            <i
+              class="fa fa-exclamation-triangle"
+              style="font-size: 25px; color: #c40"
+            ></i>
+          </p>
+
+          <span>
+            <h4>There was a problem</h4>
+            <ul class="errorList">
+              <li class="emailErr">Enter your email</li>
+              <li class="passErr">Enter your password</li>
+              <li class="wrongCredentials">Wrong Credentials</li>
+            </ul>
+          </span>
+        </div>
+      </header>
+
+      <!-- sign in-start -->
+
+      <div class="signInBox">
+        <h1>Sign in</h1>
+        <div class="input email">
+          <label for="email" class="inputText">Email or phone number</label>
+          <input type="text" name="email" class="data" id="email" />
+        </div>
+
+        <div class="input password">
+          <div class="passLabel">
+            <label for="password" class="inputText">Password</label>
+            <label for="forgetPass"
+              ><a href="" class="forgetpass">Forgot your password?</a></label
+            >
+          </div>
+          <input type="password" name="password" class="data" id="password" />
+        </div>
+
+        <div class="btn">
+          <button type="submit" class="signInBtn loginBtn">Sign In</button>
+        </div>
+
+        <div class="terms">
+          <p>
+            By creating an account, you agree to the Amazon
+            <a href="">Conditions of Use and Privacy Notice</a>
+          </p>
+        </div>
+
+        <div class="keepSignIn">
+          <input type="checkbox" />
+          <label for="checkbox">Keep me signed in.</label>
+          <a href="">Details</a><i class="fas fa-caret-down"></i>
+        </div>
+
+        <div class="newToAmazon">
+          <h5 class="noSpan">New to Amazon?</h5>
+        </div>
+
+        <div class="signupPage">
+          <button type="submit">
+            <a href="/signup">Create your Amazon account</a>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- sign in-end -->
+    <!-- footer-start -->
+
+    <footer>
+      <div class="footer">
+        <div class="terms">
+          <p><a href="">Terms and Privacy Notice</a></p>
+          <p><a href="">Send us feedback</a></p>
+          <p><a href="">Help</a></p>
+          <div class="copyright">
+            <p class="copy">© 1996-2022, Amazon.com, Inc. or its affiliates</p>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- footer-end -->
+
+    <script>
+      function signupPage() {
+      window.location.href = "/signup.html";
+    }
+
+    //login validation
+
+    var loginInfo = JSON.parse(localStorage.getItem("loginInfo")) || [];
+
+    document.querySelector(".loginBtn").addEventListener("click", function () {
+      var errorBox = document.querySelector(".errorBox");
+      var emailErr = document.querySelector(".emailErr");
+      var passErr = document.querySelector(".passErr");
+      var wrongCredentials = document.querySelector(".wrongCredentials");
+
+      var email = document.querySelector("#email").value;
+      var pass = document.querySelector("#password").value;
+
+      if (email.length && pass.length) {
+        var check = true;
+        var flag = 0;
+
+        loginInfo.map(function (elem) {
+          if (elem.email === email && elem.password === pass) {
+            errorBox.style.display = "none";
+            emailErr.style.display = "none";
+            passErr.style.display = "none";
+            flag = 1;
+            check = true;
+            alert("Signed in successfully");
+            localStorage.setItem("userName", JSON.stringify(elem.name));
+            window.location.href = "/AfterSignIn/afterSignIn.html";
+          } else {
+            if (flag !== 1) {
+              check = false;
+            }
+          }
+        });
+        if (!check) {
+          errorBox.style.display = "block";
+          emailErr.style.display = "none";
+          passErr.style.display = "none";
+          wrongCredentials.style.display = "block";
+        }
+      } else {
+        if (!email.length && !pass.length) {
+          //alert(please enter all the fields)
+          errorBox.style.display = "block";
+          emailErr.style.display = "block";
+          passErr.style.display = "block";
+        } else if (!email.length) {
+          //alert(please enter your name)
+          errorBox.style.display = "block";
+          emailErr.style.display = "block";
+          passErr.style.display = "none";
+        } else {
+          //alert(please enter your password)
+          errorBox.style.display = "block";
+          emailErr.style.display = "none";
+          passErr.style.display = "block";
+        }
+      }
+    });
+
+    </script>
+  </body>
+</html>
+
